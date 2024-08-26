@@ -24,26 +24,44 @@ function clickMeHandler(e) {
     window.speechSynthesis.speak(utterance);
 }
 
-
 const startButton = document.getElementById('startButton');
+const stopButton = document.getElementById('pauseButton')
 const outputDiv = document.getElementById('output');
+const recognition = new webkitSpeechRecognition() || new SpeechRecognition();
+let result = ""
 
-const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition || window.mozSpeechRecognition || window.msSpeechRecognition)();
-recognition.lang = 'en-US';
-
-recognition.onstart = () => {
-    startButton.textContent = 'Listening...';
-};
-
-recognition.onresult = (event) => {
-    const transcript = event.results[0][0].transcript;
-    outputDiv.textContent = transcript;
-};
-
-recognition.onend = () => {
-    startButton.textContent = 'Start Voice Input';
-};
+// recognition.interimResults = true;
+recognition.final
+recognition.continuous = true;
 
 startButton.addEventListener('click', () => {
     recognition.start();
+    startButton.disabled = true;
+    startButton.textContent = 'Recording...';
 });
+
+stopButton.addEventListener('click', () => {
+    recognition.stop()
+    startButton.disabled = false
+    result += " "
+    outputDiv.textContent = result
+})
+
+recognition.onresult = event => {
+    result += event.results[event.results.length - 1][0].transcript;
+    console.log(result)
+    outputDiv.textContent = result;
+};
+
+recognition.onend = () => {
+    startButton.disabled = false;
+    startButton.textContent = 'Start Recording';
+};
+
+recognition.onerror = event => {
+    console.error('Speech recognition error:', event.error);
+};
+
+recognition.onnomatch = () => {
+    console.log('No speech was recognized.');
+};
