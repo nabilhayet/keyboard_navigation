@@ -4,13 +4,32 @@ if ('speechSynthesis' in window) {
     alert("Sorry, your browser doesn't support the speech synthesis API !");
 }
 
-// document.getElementById('b').onkeypress = clickMeHandler;
 
-// document.getElementById('b').onload = clickMeHandler
 
-// function clickMeHandler(e) {
-// console.log("click me handler, type: ", e.type);
-// console.log("click me handler, target: ", e.target);
+const startButton = document.getElementById('startButton');
+const stopButton = document.getElementById('pauseButton')
+const outputDiv = document.getElementById('output');
+const textArea = document.getElementById("story");
+const navigateButton = document.getElementById("navigate");
+const recognition = new webkitSpeechRecognition() || new SpeechRecognition();
+let result = ""
+
+// recognition.interimResults = true;
+recognition.final
+recognition.continuous = true;
+
+startButton.addEventListener('click', () => {
+    recognition.start();
+    startButton.disabled = true;
+    startButton.textContent = 'Recording...';
+});
+
+stopButton.addEventListener('click', () => {
+    recognition.stop()
+    startButton.disabled = false
+    result += " "
+    outputDiv.textContent = result
+})
 
 let letters = new Map()
 letters = {
@@ -42,50 +61,25 @@ letters = {
     m: [2, 8]
 }
 
-// let pTag = document.getElementsByTagName("p")[0].innerHTML
-// let text = pTag
-
-// document.addEventListener('DOMContentLoaded', function () {
-
-
-//     // Create a new SpeechSynthesisUtterance object
-//     let utterance = new SpeechSynthesisUtterance();
-
-//     // Set the text and voice of the utterance
-//     utterance.text = text;
-//     utterance.voice = window.speechSynthesis.getVoices()[0];
-
-//     // Speak the utterance
-//     window.speechSynthesis.speak(utterance);
-// })
-
-const startButton = document.getElementById('startButton');
-const stopButton = document.getElementById('pauseButton')
-const outputDiv = document.getElementById('output');
-const textArea = document.getElementById("story");
-const navigateButton = document.getElementById("navigate");
-const recognition = new webkitSpeechRecognition() || new SpeechRecognition();
-let result = ""
-
-// recognition.interimResults = true;
-recognition.final
-recognition.continuous = true;
-
-startButton.addEventListener('click', () => {
-    recognition.start();
-    startButton.disabled = true;
-    startButton.textContent = 'Recording...';
-});
-
-stopButton.addEventListener('click', () => {
-    recognition.stop()
-    startButton.disabled = false
-    result += " "
-    outputDiv.textContent = result
-})
-
 navigateButton.addEventListener('click', () => {
+    recognition.stop()
+    navigateButton.disabled = true
+    let content = result
 
+    for (let i = 0; i < content.length; i++) {
+        let utterance = new SpeechSynthesisUtterance();
+        utterance.text = content[i];
+        // utterance.voice = window.speechSynthesis.getVoices()[0];
+        window.speechSynthesis.speak(utterance);
+
+        let position = letters[content[i]]
+        let letterGuide = `To type ${content[i]} go to the bottom corner of your keyboard and then go ${position[0]} position up and ${position[1]} position right`
+
+        let letterPositionGuide = new SpeechSynthesisUtterance()
+        letterPositionGuide.text = letterGuide
+        //  letterPositionGuide.voice = window.speechSynthesis.getVoices()[0]
+        window.speechSynthesis.speak(letterPositionGuide)
+    }
 })
 
 recognition.onresult = event => {
