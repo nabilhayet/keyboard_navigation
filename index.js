@@ -4,13 +4,12 @@ if ('speechSynthesis' in window) {
     alert("Sorry, your browser doesn't support the speech synthesis API !");
 }
 
-
-
 const startButton = document.getElementById('startButton');
 const stopButton = document.getElementById('pauseButton')
 const outputDiv = document.getElementById('output');
 const textArea = document.getElementById("story");
 const navigateButton = document.getElementById("navigate");
+const typedText = document.getElementById("story");
 const recognition = new webkitSpeechRecognition() || new SpeechRecognition();
 let result = ""
 
@@ -61,26 +60,57 @@ letters = {
     m: [2, 8]
 }
 
-navigateButton.addEventListener('click', () => {
-    recognition.stop()
-    navigateButton.disabled = true
-    let content = result
+/*
+async function fetchData(num) { 
+  // Simulating an API call
+  return new Promise(resolve => {
+    setTimeout(() => resolve(`Data for ${num}`), 1000);
+  });
+} 
 
-    for (let i = 0; i < content.length; i++) {
-        let utterance = new SpeechSynthesisUtterance();
-        utterance.text = content[i];
-        // utterance.voice = window.speechSynthesis.getVoices()[0];
-        window.speechSynthesis.speak(utterance);
+async function myFunction() { 
+  for (let i = 1; i <= 10; i++) { 
+    const data = await fetchData(i); 
+    console.log(data); 
+  } 
+}
+*/
 
-        let position = letters[content[i]]
-        let letterGuide = `To type ${content[i]} go to the bottom corner of your keyboard and then go ${position[0]} position up and ${position[1]} position right`
+navigateButton.addEventListener('click', letterSpeech)
 
-        let letterPositionGuide = new SpeechSynthesisUtterance()
-        letterPositionGuide.text = letterGuide
-        //  letterPositionGuide.voice = window.speechSynthesis.getVoices()[0]
-        window.speechSynthesis.speak(letterPositionGuide)
+function letterSpeech() {
+    if (result.length > 0) {
+        recognition.stop()
+        navigateButton.disabled = true
+        startButton.disabled = true
+        stopButton.disabled = true
+        let content = result
+
+        for (let i = 0; i < content.length; i++) {
+            let utterance = new SpeechSynthesisUtterance();
+            utterance.text = content[i];
+            // utterance.voice = window.speechSynthesis.getVoices()[0];
+            window.speechSynthesis.speak(utterance);
+
+            let position = letters[content[i]]
+            let letterGuide = `To type ${content[i]} go to the bottom corner of your keyboard and then go ${position[0]} position up and ${position[1]} position right`
+
+            let letterPositionGuide = new SpeechSynthesisUtterance()
+            letterPositionGuide.text = letterGuide
+            //  letterPositionGuide.voice = window.speechSynthesis.getVoices()[0]
+            window.speechSynthesis.speak(letterPositionGuide)
+
+            typedText.addEventListener('input', event => {
+
+                if (event.data == result[i] && i == event.data.length - 1) {
+                    console.log("You have typed successfully")
+                } else {
+                    console.log("Please delete the last letter")
+                }
+            })
+        }
     }
-})
+}
 
 recognition.onresult = event => {
     result += event.results[event.results.length - 1][0].transcript;
