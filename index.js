@@ -60,57 +60,48 @@ letters = {
     m: [2, 8]
 }
 
-/*
-async function fetchData(num) { 
-  // Simulating an API call
-  return new Promise(resolve => {
-    setTimeout(() => resolve(`Data for ${num}`), 1000);
-  });
-} 
-
-async function myFunction() { 
-  for (let i = 1; i <= 10; i++) { 
-    const data = await fetchData(i); 
-    console.log(data); 
-  } 
-}
-*/
-
 navigateButton.addEventListener('click', letterSpeech)
-
 function letterSpeech() {
     if (result.length > 0) {
-        recognition.stop()
-        navigateButton.disabled = true
         startButton.disabled = true
+        navigateButton.disabled = true
         stopButton.disabled = true
+        recognition.stop()
         let content = result
 
-        for (let i = 0; i < content.length; i++) {
-            let utterance = new SpeechSynthesisUtterance();
-            utterance.text = content[i];
-            // utterance.voice = window.speechSynthesis.getVoices()[0];
-            window.speechSynthesis.speak(utterance);
-
-            let position = letters[content[i]]
-            let letterGuide = `To type ${content[i]} go to the bottom corner of your keyboard and then go ${position[0]} position up and ${position[1]} position right`
-
-            let letterPositionGuide = new SpeechSynthesisUtterance()
-            letterPositionGuide.text = letterGuide
-            //  letterPositionGuide.voice = window.speechSynthesis.getVoices()[0]
-            window.speechSynthesis.speak(letterPositionGuide)
-
-            typedText.addEventListener('input', event => {
-
-                if (event.data == result[i] && i == event.data.length - 1) {
-                    console.log("You have typed successfully")
-                } else {
-                    console.log("Please delete the last letter")
-                }
-            })
-        }
+        let utterance = new SpeechSynthesisUtterance();
+        utterance.text = content
+        window.speechSynthesis.speak(utterance)
     }
 }
+
+let counter = 0
+let pointer = 0
+let u = new SpeechSynthesisUtterance();
+
+typedText.addEventListener('input', event => {
+    if (event.key === "Backspace" || event.key === "Delete") {
+        pointer -= 1
+        u.text = `You deleted the last character`
+        window.speechSynthesis.speak(u)
+    }
+    if (pointer < 0) {
+        pointer = 0
+    }
+    if (event.data == result[counter] && counter == pointer) {
+        u.text = `You typed letter ${event.data} and it matched with your speech`
+        window.speechSynthesis.speak(u)
+        counter += 1
+        pointer += 1
+    } else {
+        console.log("Please delete the last letter")
+        let position = letters[result[counter]]
+        pointer += 1
+        debugger
+        u.text = `You typed letter ${event.data} and it did not match with letter ${result[counter]}.First delete ${pointer - counter} characters and then to type ${result[counter]} go to the bottom corner of your keyboard and then go ${position[0]} position up and ${position[1]} position right.`
+        window.speechSynthesis.speak(u)
+    }
+})
 
 recognition.onresult = event => {
     result += event.results[event.results.length - 1][0].transcript;
