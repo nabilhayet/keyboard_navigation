@@ -3,18 +3,23 @@
 
 <head>
     <title>Voice to Text</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="index.css">
 </head>
 
-<body id="b">
+<body>
     <div class="container">
-        <p role="focus" tabindex="1">Hello User! Press any key to start recording your voice</p>
-        <h1 class="title">Speech to Text</h1>
-        <button id="startButton" class="recordButton">Start Recording</button>
-        <button id="pauseButton" class="recorOfdButton">Stop Recording</button>
-        <div id="output" class="outputText"></div>
-        <button id="navigate" class="navigate">Navigate me!</button>
+        <h2>Hello User! Press Start Recording button to start recording your voice</h1>
+            <h4 class="title">Speech to Text</h1>
+                <button type="button" class="btn btn-success" id="startButton" class="recordButton">Start
+                    Recording</button>
+                <button type="button" class="btn btn-danger" id="pauseButton" class="recorOfdButton">Stop
+                    Recording</button>
+                <div id="output" class="outputText"></div>
+                <button type="button" class="btn btn-warning" id="navigate" class="navigate">Navigate me!</button>
     </div>
-    <div>
+    <div class="story">
         <label for="story">Write your Thoughts</label>
         <textarea id="story" name="story" rows="10" cols="50">
         </textarea>
@@ -22,6 +27,10 @@
 
     <script defer type="text/javascript" src="index.js">
     </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+
 </body>
 
 

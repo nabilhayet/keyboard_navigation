@@ -63,10 +63,10 @@ letters = {
 navigateButton.addEventListener('click', letterSpeech)
 function letterSpeech() {
     if (result.length > 0) {
+        recognition.stop()
         startButton.disabled = true
         navigateButton.disabled = true
         stopButton.disabled = true
-        recognition.stop()
         let content = result
 
         let utterance = new SpeechSynthesisUtterance();
@@ -76,49 +76,57 @@ function letterSpeech() {
     }
 }
 
-// hellpqro
-
 let counter = 0
 let pointer = 0
 let u = new SpeechSynthesisUtterance();
 let str = ""
 
 typedText.addEventListener('input', event => {
-    if (event.inputType == "deleteContentBackward") {
-        if (result[pointer] == result[counter] && counter == pointer) {
-            counter -= 1
-            console.log("You deleted the correct letter")
-        }
-        pointer -= 1
-        u.text = `You deleted the last character`
+
+    if (result.length == 0) {
+        u.text = "You did not give voice input"
         u.rate = 0.5;
         window.speechSynthesis.speak(u)
-
-        if (counter < 0) {
-            counter = 0
-        }
-        if (pointer < 0) {
-            pointer = 0
-        }
-
+        typedText.disabled = true
+        typedText.value = ""
     } else {
-        if (event.data == result[counter] && counter == pointer) {
-            str = str + event.data
-            u.text = `You typed letter ${event.data} and it matched with your speech`
+        if (event.inputType == "deleteContentBackward") {
+            if (result[pointer] == result[counter] && counter == pointer) {
+                counter -= 1
+                console.log("You deleted the correct letter")
+            }
+            pointer -= 1
+            u.text = `You deleted the last character`
             u.rate = 0.5;
             window.speechSynthesis.speak(u)
-            counter += 1
-            pointer += 1
+
+            if (counter < 0) {
+                counter = 0
+            }
+            if (pointer < 0) {
+                pointer = 0
+            }
+
         } else {
-            console.log("Please delete the last letter")
-            str = str + event.data
-            let position = letters[result[counter]]
-            pointer += 1
-            u.text = `You typed letter ${event.data} and it did not match with letter ${result[counter]}.First delete ${pointer - counter} characters and then to type ${result[counter]} go to the bottom corner of your keyboard and then go ${position[0]} position up and ${position[1]} position right.`
-            u.rate = 0.5;
-            window.speechSynthesis.speak(u)
+            if (event.data == result[counter] && counter == pointer) {
+                str = str + event.data
+                u.text = `You typed letter ${event.data} and it matched with your speech`
+                u.rate = 0.5;
+                window.speechSynthesis.speak(u)
+                counter += 1
+                pointer += 1
+            } else {
+                console.log("Please delete the last letter")
+                str = str + event.data
+                let position = letters[result[counter]]
+                pointer += 1
+                u.text = `You typed letter ${event.data} and it did not match with letter ${result[counter]}.First delete ${pointer - counter} characters and then to type ${result[counter]} go to the bottom corner of your keyboard and then go ${position[0]} position up and ${position[1]} position right.`
+                u.rate = 0.5;
+                window.speechSynthesis.speak(u)
+            }
         }
     }
+
 
     if (counter == result.length) {
         u.text = "You have reachhed the end of the voice input"
