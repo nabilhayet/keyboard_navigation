@@ -71,35 +71,60 @@ function letterSpeech() {
 
         let utterance = new SpeechSynthesisUtterance();
         utterance.text = content
+        utterance.rate = 0.5;
         window.speechSynthesis.speak(utterance)
     }
 }
 
+// hellpqro
+
 let counter = 0
 let pointer = 0
 let u = new SpeechSynthesisUtterance();
+let str = ""
 
 typedText.addEventListener('input', event => {
-    if (event.key === "Backspace" || event.key === "Delete") {
+    if (event.inputType == "deleteContentBackward") {
+        if (result[pointer] == result[counter] && counter == pointer) {
+            counter -= 1
+            console.log("You deleted the correct letter")
+        }
         pointer -= 1
         u.text = `You deleted the last character`
+        u.rate = 0.5;
         window.speechSynthesis.speak(u)
-    }
-    if (pointer < 0) {
-        pointer = 0
-    }
-    if (event.data == result[counter] && counter == pointer) {
-        u.text = `You typed letter ${event.data} and it matched with your speech`
-        window.speechSynthesis.speak(u)
-        counter += 1
-        pointer += 1
+
+        if (counter < 0) {
+            counter = 0
+        }
+        if (pointer < 0) {
+            pointer = 0
+        }
+
     } else {
-        console.log("Please delete the last letter")
-        let position = letters[result[counter]]
-        pointer += 1
-        debugger
-        u.text = `You typed letter ${event.data} and it did not match with letter ${result[counter]}.First delete ${pointer - counter} characters and then to type ${result[counter]} go to the bottom corner of your keyboard and then go ${position[0]} position up and ${position[1]} position right.`
+        if (event.data == result[counter] && counter == pointer) {
+            str = str + event.data
+            u.text = `You typed letter ${event.data} and it matched with your speech`
+            u.rate = 0.5;
+            window.speechSynthesis.speak(u)
+            counter += 1
+            pointer += 1
+        } else {
+            console.log("Please delete the last letter")
+            str = str + event.data
+            let position = letters[result[counter]]
+            pointer += 1
+            u.text = `You typed letter ${event.data} and it did not match with letter ${result[counter]}.First delete ${pointer - counter} characters and then to type ${result[counter]} go to the bottom corner of your keyboard and then go ${position[0]} position up and ${position[1]} position right.`
+            u.rate = 0.5;
+            window.speechSynthesis.speak(u)
+        }
+    }
+
+    if (counter == result.length) {
+        u.text = "You have reachhed the end of the voice input"
+        u.rate = 0.5;
         window.speechSynthesis.speak(u)
+        typedText.disabled = true
     }
 })
 
