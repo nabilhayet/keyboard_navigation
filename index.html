@@ -10,18 +10,21 @@
 
 <body>
     <div class="container">
-        <h2>Hello User! Press Start Recording button to start recording your voice</h1>
-            <h4 class="title">Speech to Text</h1>
-                <button type="button" class="btn btn-success" id="startButton" class="recordButton">Start
-                    Recording</button>
-                <button type="button" class="btn btn-danger" id="pauseButton" class="recorOfdButton">Stop
-                    Recording</button>
-                <div id="output" class="outputText"></div>
-                <button type="button" class="btn btn-warning" id="navigate" class="navigate">Navigate me!</button>
+        <h2 class="title">Welcome to our Speech to Text App</h2>
+        <h4>Hello User! Press Start Recording button to start recording your voice</h4>
+        <div id="options">
+            <button type="button" class="btn btn-success" id="startButton" class="recordButton">Start
+                Recording</button>
+            <button type="button" class="btn btn-danger" id="pauseButton" class="recorOfdButton">Stop
+                Recording</button>
+            <button type="button" class="btn btn-warning" id="navigate" class="navigate">Navigate me!</button>
+        </div>
+        <div id="output" class="outputText"></div>
+
     </div>
     <div class="story">
         <label for="story">Write your Thoughts</label>
-        <textarea id="story" name="story" rows="10" cols="50">
+        <textarea id="story" name="story" rows="10" cols="100">
         </textarea>
     </div>
 

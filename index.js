@@ -21,6 +21,7 @@ startButton.addEventListener('click', () => {
     recognition.start();
     startButton.disabled = true;
     startButton.textContent = 'Recording...';
+    typedText.disabled = false
 });
 
 stopButton.addEventListener('click', () => {
@@ -71,7 +72,7 @@ function letterSpeech() {
 
         let utterance = new SpeechSynthesisUtterance();
         utterance.text = content
-        utterance.rate = 0.5;
+        utterance.rate = 0.25;
         window.speechSynthesis.speak(utterance)
     }
 }
@@ -82,7 +83,7 @@ let u = new SpeechSynthesisUtterance();
 let str = ""
 
 typedText.addEventListener('input', event => {
-
+    recognition.stop()
     if (result.length == 0) {
         u.text = "You did not give voice input"
         u.rate = 0.5;
