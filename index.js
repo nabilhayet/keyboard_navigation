@@ -1,4 +1,3 @@
-
 let letters = new Map()
 letters = {
     q: [4, 2],
@@ -34,7 +33,6 @@ navigateButton.addEventListener('click', letterSpeech)
 function letterSpeech() {
     if (result.length > 0) {
         recognition.stop()
-        startButton.disabled = true
         navigateButton.disabled = true
         stopButton.disabled = true
         let content = result
@@ -53,6 +51,8 @@ let str = ""
 
 typedText.addEventListener('input', event => {
     recognition.stop()
+    result = result.trim()
+    result = result.toLowerCase()
     if (result.length == 0) {
         u.text = "You did not give voice input"
         u.rate = 0.5;
@@ -80,25 +80,42 @@ typedText.addEventListener('input', event => {
         } else {
             if (event.data == result[counter] && counter == pointer) {
                 str = str + event.data
-                u.text = `You typed letter ${event.data} and it matched with your speech`
-                u.rate = 0.5;
-                window.speechSynthesis.speak(u)
+                if (event.data == " ") {
+                    u.text = "You typed space bar and it did match with your input"
+                    u.rate = 0.5;
+                    window.speechSynthesis.speak(u)
+                } else {
+                    u.text = `You typed letter ${event.data} and it matched with your speech`
+                    u.rate = 0.5;
+                    window.speechSynthesis.speak(u)
+                }
+
                 counter += 1
                 pointer += 1
             } else {
                 console.log("Please delete the last letter")
-                str = str + event.data
-                let position = letters[result[counter]]
+                //    str = str + event.data
+
                 pointer += 1
-                u.text = `You typed letter ${event.data} and it did not match with letter ${result[counter]}.First delete ${pointer - counter} characters and then to type ${result[counter]} go to the bottom corner of your keyboard and then go ${position[0]} position up and ${position[1]} position right.`
-                u.rate = 0.5;
-                window.speechSynthesis.speak(u)
+                if (result[counter] == " ") {
+                    let pos = letters['space']
+                    u.text = `You typed letter ${event.data} and it did not match with space bar.First delete ${pointer - counter} characters and then to type space bar go to the bottom corner of your keyboard and then go ${pos[0]} position up and ${pos[1]} position right.`
+                    u.rate = 0.5;
+                    window.speechSynthesis.speak(u)
+                } else {
+                    let position = letters[result[counter]]
+                    u.text = `You typed letter ${event.data} and it did not match with letter ${result[counter]}.First delete ${pointer - counter} characters and then to type ${result[counter]} go to the bottom corner of your keyboard and then go ${position[0]} position up and ${position[1]} position right.`
+                    u.rate = 0.5;
+                    window.speechSynthesis.speak(u)
+                }
+
+
             }
         }
     }
 
-
-    if (counter == result.length) {
+    if (str.length == result.length) {
+        //  debugger
         u.text = "You have reachhed the end of the voice input"
         u.rate = 0.5;
         window.speechSynthesis.speak(u)

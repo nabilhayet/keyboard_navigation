@@ -7,21 +7,26 @@ const typedText = document.getElementById("story");
 const recognition = new webkitSpeechRecognition() || new SpeechRecognition();
 let result = ""
 
-// recognition.interimResults = true;
 recognition.final
 recognition.continuous = true;
 
 startButton.addEventListener('click', () => {
     recognition.start();
     startButton.disabled = true;
+    stopButton.disabled = false
     startButton.textContent = 'Recording...';
     typedText.disabled = false
+    if (result.length > 0) {
+        result += " "
+    }
 });
 
 stopButton.addEventListener('click', () => {
     recognition.stop()
     startButton.disabled = false
-    result += " "
+    stopButton.disabled = true
+    navigateButton.disabled = false
+    //  result += " "
     outputDiv.textContent = result
 })
 
