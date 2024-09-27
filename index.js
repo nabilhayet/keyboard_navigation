@@ -94,8 +94,6 @@ typedText.addEventListener('input', event => {
                 pointer += 1
             } else {
                 console.log("Please delete the last letter")
-                //    str = str + event.data
-
                 pointer += 1
                 if (result[counter] == " ") {
                     let pos = letters['space']
@@ -114,8 +112,7 @@ typedText.addEventListener('input', event => {
         }
     }
 
-    if (str.length == result.length) {
-        //  debugger
+    if (counter == result.length) {
         u.text = "You have reachhed the end of the voice input"
         u.rate = 0.5;
         window.speechSynthesis.speak(u)
