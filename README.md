@@ -22,27 +22,7 @@ Table of Contents
    <li>Stop button to stop recording</li>
   <li>Navigate button to echo user's speech</li>
   <li>Navigate keyboard letters as voice command while typing</li>
-  <li></li>
 </ul>
-
-## User Signup 
-![signup](https://user-images.githubusercontent.com/33500404/109457096-2ac89100-7a28-11eb-8b43-59f02ad884df.gif)
-
-## Make Reservation
-![make_res](https://user-images.githubusercontent.com/33500404/109456292-8265fd00-7a26-11eb-96f8-35cc644b9bd6.gif)
-
-## View Reservation 
-![view_reservation](https://user-images.githubusercontent.com/33500404/109456997-f3f27b00-7a27-11eb-8cfe-7816b5dbce14.gif)
-
-## Add Cafe
-![add_cafe](https://user-images.githubusercontent.com/33500404/109458180-4fbe0380-7a2a-11eb-84db-92658ebf615a.gif)
-
-## View Cafes
-![view_cafes](https://user-images.githubusercontent.com/33500404/109458557-091cd900-7a2b-11eb-985f-263f27203c86.gif)
-
-## Form Validation
-![Error_validation](https://user-images.githubusercontent.com/33500404/109458252-6ebc9580-7a2a-11eb-927f-fbbdfdc17d31.gif)
-
 
 ## Tech-Stack
 <p>This Web app makes use of the following:</p>
