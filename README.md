@@ -1,7 +1,9 @@
 ![GitHub Repo stars](https://img.shields.io/github/stars/nabilhayet/OS) ![GitHub forks](https://img.shields.io/github/forks/nabilhayet/OS) ![GitHub followers](https://img.shields.io/github/followers/nabilhayet) ![Bitbucket open issues](https://img.shields.io/bitbucket/issues/nabilhayet/OS)                                          
-                                        <h1>:jack_o_lantern: OS Simulation :jack_o_lantern: </h1>
+                                        <h1>:jack_o_lantern: Keyboard Navigation :jack_o_lantern: </h1>
                                                       
-This project offers a comprehensive demonstration of how an operating system functions. It simulates the creation of various processes and their management in memory and on the hard disk. While it doesn't execute real processes, the system's design and mechanisms provide valuable insights into prioritizing tasks. Exploring the parent-child relationship among processes illustrates the interconnectedness and dependencies within a system. 
+This groundbreaking project assists individuals without vision in navigating letters on a keyboard. It takes input from the user and continues until the stop button is pressed. When the navigate button is activated, the system echoes the user's input and displays the text on the webpage. 
+
+A key feature of this project is the keyboard navigation functionality. It provides real-time voice feedback to users, informing them if they pressed the correct letter. In cases of an incorrect key press, the system instructs the user to delete the character and guides them to the correct position on the keyboard. This voice-guided assistance persists until the end of the input is reached. 
 <a href="https://www.youtube.com/watch?v=UWaRqHpO8fU&t=2s">Demo</a>
 
 Table of Contents
@@ -14,15 +16,12 @@ Table of Contents
                                
 ## Features
 <ul>
-   <li>Create a process in the system</li>
-   <li>Have a CPU to keeep track of current process</li>
-  <li>Create Ready-Queue to hold processes waitting to use CPU</li>
-  <li>Create Hard-Disk to move processes from CPU</li>
-  <li>Create parent-child relationship objects to keep track of different process.</li>
-  <li>Edit/Delete a process based on any input</li>
-  <li>Create Zombie process</li>
-  <li>Display status of any process</li>
-  <li>Display status of different memory management</li>
+   <li>Record User's speech</li>
+   <li>Speech to text</li>
+   <li>Text to Speech</li>
+   <li>Stop button to stop recording</li>
+  <li>Navigate button to echo user's speech</li>
+  <li>Navigate keyboard letters as voice command while typing</li>
   <li></li>
 </ul>
 
@@ -46,88 +45,68 @@ Table of Contents
 
 
 ## Tech-Stack
-<p>This cli app makes use of the following:</p>
-* ruby '2.6.1'
-* 'bcrypt', '~> 3.1.7'
+<p>This Web app makes use of the following:</p>
+*  Javascript
+*  HTML
+*  CSS
 
 ## Installing
 <ul>
    <li> Clone this repo to your local machine git clone <this-repo-url></li>
-  <li> run brew update and brew install ruby to install required dependencies</li>
-  <li> run gem install pry</li>
-  <li> run ruby main.rb</li>
+  <li> Make sure your browser is upto date</li>
+  <li>Only Chrome & Firefox supports speech recognition </li>
+  <li> run index.html</li>
 </ul>
         
 ## Challenges
 <ul>
-  <li> Connecting multiple memory management like CPU, Hard Disk, Ready-Queue</li>
-  <li> Creating parent child nested processes</li>
-  <li> Creating System design for each memory management</li>
-  <li> Adding/removing a nested process</li>
+  <li>Continuous navigation from one button to another</li>
+  <li>Removing unexpected input from voice command </li>
+  <li> Mapping letters to keyboard position</li>
+  <li> Echo voice command for each input</li>
 </ul>
 
 ## Future-Implementation
 <ul>
-  <li>Creating real time processes to get actual simulation</li>
-  <li>Adding other memory management like RAM, ROM etc</li>
-  <li>Adding multiple machines/systems</li>
+  <li>Getting more accurate input from user</li>
+  <li>Improve keyboard navigation's algorithm</li>
+  <li>Adding voice command replacing buttons</li>
 </ul>
 
 ## Code-Snippet 
 
 ```
-while(input != 'Exit')
-  if(input == 'A')
-    CreateProcess(input)
-  elsif(input == 'Q')
-    ProcessQueueAdjust()
-  elsif(input == 'fork')
-    CreateProcess(input)
-  elsif(input == 'S r')
-    ProcessStatus()
-  end 
-end 
-```
-```
-def CreateProcess(input)
-  @process =  Pid.new($pid)
-  $pid = @process.findObject
-  $process_array.push(@process)
-  $ready_queue.push(@process.pid)
-  if($cpu == 0 && $ready_queue.length > 0)
-    $cpu = $ready_queue[0]
-    $ready_queue.shift()
-  end
-  MemoryUtilization(input)
-end 
+const startButton = document.getElementById('startButton');
+const stopButton = document.getElementById('pauseButton')
+const outputDiv = document.getElementById('output');
+const textArea = document.getElementById("story");
+const navigateButton = document.getElementById("navigate");
+const typedText = document.getElementById("story");
+const recognition = new webkitSpeechRecognition() || new SpeechRecognition();
+let result = ""
 
-```
-```
+recognition.final
+recognition.continuous = true;
 
-class Pid
-  attr_accessor :pid
-  def initialize(pid)
-    @pid = pid+=1
-  end 
+startButton.addEventListener('click', () => {
+    recognition.start();
+    startButton.disabled = true;
+    stopButton.disabled = false
+    startButton.textContent = 'Recording...';
+    typedText.disabled = false
+    if (result.length > 0) {
+        result += " "
+    }
+});
 
-  def findObject
-    @pid 
-  end 
-end 
-```
-```
-
-def HardDiskStatus
-  puts "The hard disk number being used now : "
-  $hard_disk.each do |hard_disk_num, hard_disk_info|
-    puts hard_disk_num
-    puts "---------------------"
-    hard_disk_info.each do |h,d|
-      puts "The #{h} is - #{d}"
-    end 
-    puts "-------------------"
-  end 
-end 
+stopButton.addEventListener('click', () => {
+    recognition.stop()
+    startButton.disabled = false
+    stopButton.disabled = true
+    navigateButton.disabled = false
+    //  result += " "
+    outputDiv.textContent = result
+})
 ```
 
 
