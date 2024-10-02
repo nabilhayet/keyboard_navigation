@@ -22,7 +22,6 @@ Table of Contents
    <li>Stop button to stop recording</li>
   <li>Navigate button to echo user's speech</li>
   <li>Navigate keyboard letters as voice command while typing</li>
-  <li></li>
 </ul>
 
 ## Record User's Speech
