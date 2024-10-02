@@ -4,7 +4,8 @@
 This groundbreaking project assists individuals without vision in navigating letters on a keyboard. It takes input from the user and continues until the stop button is pressed. When the navigate button is activated, the system echoes the user's input and displays the text on the webpage. 
 
 A key feature of this project is the keyboard navigation functionality. It provides real-time voice feedback to users, informing them if they pressed the correct letter. In cases of an incorrect key press, the system instructs the user to delete the character and guides them to the correct position on the keyboard. This voice-guided assistance persists until the end of the input is reached. 
-<a href="https://www.youtube.com/watch?v=UWaRqHpO8fU&t=2s">Demo</a>
+<a href="https://www.youtube.com/watch?v=Hn_W5HWUBPA">Demo</a>
+
 
 Table of Contents
 - [Features](#features)
@@ -24,8 +25,6 @@ Table of Contents
   <li>Navigate keyboard letters as voice command while typing</li>
 </ul>
 
-<<<<<<< HEAD
-=======
 ## Record User's Speech
 ![start_stop_recording](https://github.com/user-attachments/assets/ce46c97a-b4de-4fb4-8b85-11043aef614a)
 ## Echo User's Input
@@ -33,7 +32,6 @@ Table of Contents
 ## Navigate Keyboard's letters 
 ![keyboard_navigate](https://github.com/user-attachments/assets/a9aaa684-1441-4d52-a74d-68dbe209253e)
 
->>>>>>> origin/main
 ## Tech-Stack
 <p>This Web app makes use of the following:</p>
 *  Javascript
