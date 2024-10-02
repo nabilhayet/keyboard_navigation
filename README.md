@@ -4,7 +4,7 @@
 This groundbreaking project assists individuals without vision in navigating letters on a keyboard. It takes input from the user and continues until the stop button is pressed. When the navigate button is activated, the system echoes the user's input and displays the text on the webpage. 
 
 A key feature of this project is the keyboard navigation functionality. It provides real-time voice feedback to users, informing them if they pressed the correct letter. In cases of an incorrect key press, the system instructs the user to delete the character and guides them to the correct position on the keyboard. This voice-guided assistance persists until the end of the input is reached. 
-<a href="https://www.youtube.com/watch?v=Hn_W5HWUBPA">Demo</a>
+<li><a href="https://www.youtube.com/watch?v=Hn_W5HWUBPA">Demo</a></li>
 
 
 Table of Contents
