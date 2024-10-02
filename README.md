@@ -25,24 +25,12 @@ Table of Contents
   <li></li>
 </ul>
 
-## User Signup 
-![signup](https://user-images.githubusercontent.com/33500404/109457096-2ac89100-7a28-11eb-8b43-59f02ad884df.gif)
-
-## Make Reservation
-![make_res](https://user-images.githubusercontent.com/33500404/109456292-8265fd00-7a26-11eb-96f8-35cc644b9bd6.gif)
-
-## View Reservation 
-![view_reservation](https://user-images.githubusercontent.com/33500404/109456997-f3f27b00-7a27-11eb-8cfe-7816b5dbce14.gif)
-
-## Add Cafe
-![add_cafe](https://user-images.githubusercontent.com/33500404/109458180-4fbe0380-7a2a-11eb-84db-92658ebf615a.gif)
-
-## View Cafes
-![view_cafes](https://user-images.githubusercontent.com/33500404/109458557-091cd900-7a2b-11eb-985f-263f27203c86.gif)
-
-## Form Validation
-![Error_validation](https://user-images.githubusercontent.com/33500404/109458252-6ebc9580-7a2a-11eb-927f-fbbdfdc17d31.gif)
-
+## Record User's Speech
+![start_stop_recording](https://github.com/user-attachments/assets/ce46c97a-b4de-4fb4-8b85-11043aef614a)
+## Echo User's Input
+![navigate](https://github.com/user-attachments/assets/83ebcf26-fb08-4fab-b1da-698d650f5018)
+## Navigate Keyboard's letters 
+![keyboard_navigate](https://github.com/user-attachments/assets/a9aaa684-1441-4d52-a74d-68dbe209253e)
 
 ## Tech-Stack
 <p>This Web app makes use of the following:</p>
