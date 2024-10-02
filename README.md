@@ -24,6 +24,16 @@ Table of Contents
   <li>Navigate keyboard letters as voice command while typing</li>
 </ul>
 
+<<<<<<< HEAD
+=======
+## Record User's Speech
+![start_stop_recording](https://github.com/user-attachments/assets/ce46c97a-b4de-4fb4-8b85-11043aef614a)
+## Echo User's Input
+![navigate](https://github.com/user-attachments/assets/83ebcf26-fb08-4fab-b1da-698d650f5018)
+## Navigate Keyboard's letters 
+![keyboard_navigate](https://github.com/user-attachments/assets/a9aaa684-1441-4d52-a74d-68dbe209253e)
+
+>>>>>>> origin/main
 ## Tech-Stack
 <p>This Web app makes use of the following:</p>
 *  Javascript
